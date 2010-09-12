@@ -1,0 +1,12 @@
+This repository holds the protocol definitions for Sirikata
+(http://sirikata.com) which enable communication between
+components: space, object host, and CDN. These are the protocols that
+should be referenced to build new implementations.  For instance, they
+are used in both the main C++ Sirikata repository
+(http://github.com/sirikata/sirikata) and the JavaScript ObjectHost
+implementation (http://github.com/sirikata/katajs).
+
+This *does not* hold protocol definitions which are implementation
+specific.  For example, the protocols used in the C++ code by space
+servers to communicate with each other are stored in that repository
+because they are not exposed to any other implementations.
