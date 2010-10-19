@@ -47,6 +47,6 @@ package Sirikata.Protocol;
 // packets.  If a loss occurs, the error can be trivially ignored --
 // the next sync packet will get another update.
 message TimeSync {
-    optional int8 seqno = 1;
+    optional uint8 seqno = 1;
     optional time t = 2;
 }
