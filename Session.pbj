@@ -69,6 +69,7 @@ message ConnectResponse {
     optional Sirikata.Protocol.TimedMotionVector loc = 3;
     optional Sirikata.Protocol.TimedMotionQuaternion orientation = 4;
     optional boundingsphere3f bounds = 5;
+    optional string mesh = 6;
 }
 
 // Acknowledges that a successful connection response was receive.
