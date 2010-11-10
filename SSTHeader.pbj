@@ -68,7 +68,7 @@ message SSTStreamHeader {
 
 	optional uint16 psid = 7;
 	optional uint16	rsid = 8;
-	optional uint32 bsn = 9;
+	optional uint64 bsn = 9;
 
 	optional bytes payload = 10;
 }
