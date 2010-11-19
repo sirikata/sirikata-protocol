@@ -37,6 +37,12 @@ import "TimedMotionQuaternion.pbj";
 
 package Sirikata.Protocol.Prox;
 
+// Query Request
+
+message QueryRequest {
+    optional float query_angle = 1;
+}
+
 // Query Results
 
 message ObjectAddition {
