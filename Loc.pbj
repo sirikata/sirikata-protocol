@@ -39,6 +39,19 @@ package Sirikata.Protocol.Loc;
 
 message LocationUpdate {
     required uuid object = 1;
+
+    // The seqno is used to indicate relative age of updates so out of order
+    // updates can be handled properly. They aren't guaranteed to be sequential
+    // (i.e. you might receive 4, 7, 19), but they are guaranteed to be
+    // monotonically increasing. However, sequence numbers are also only valid
+    // between proximity additions/removals.  It is possible they will be reset
+    // when objects are removed and then added back again.
+    // Not that while the ordering within a BulkLocationUpdate and a sequence
+    // number there would be sufficient for the client to properly handle out of
+    // order updates, it is provided in LocationUpdates individually to make
+    // the client code simpler, at the expense of slightly larger packets.
+    optional uint64 seqno = 6;
+
     optional Sirikata.Protocol.TimedMotionVector location = 2;
     optional Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
     optional boundingsphere3f bounds = 4;
