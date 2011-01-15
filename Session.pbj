@@ -47,7 +47,13 @@ message Connect {
     }
 
     required ConnectionType type = 1;
+
+    // Requested object identifier in this space
     required uuid object = 2;
+    // Optional authentication data, encoded in a byte array to
+    // support a variety of authentication methods.
+    optional bytes auth = 8;
+
     optional Sirikata.Protocol.TimedMotionVector loc = 3;
     optional Sirikata.Protocol.TimedMotionQuaternion orientation = 4;
     optional boundingsphere3f bounds = 5;
