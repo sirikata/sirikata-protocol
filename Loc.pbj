@@ -56,6 +56,7 @@ message LocationUpdate {
     optional Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
     optional boundingsphere3f bounds = 4;
     optional string mesh = 5;
+    optional bytes physics = 7;
 }
 
 message BulkLocationUpdate {
@@ -71,6 +72,7 @@ message LocationUpdateRequest {
     optional Sirikata.Protocol.TimedMotionQuaternion orientation = 2;
     optional boundingsphere3f bounds = 3;
     optional string mesh = 4;
+    optional bytes physics = 5;
 }
 
 message Container {

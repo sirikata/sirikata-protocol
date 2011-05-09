@@ -51,6 +51,7 @@ message ObjectAddition {
     required Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
     required boundingsphere3f bounds = 4;
     optional string mesh = 5;
+    optional string physics = 6;
 }
 
 message ObjectRemoval {
