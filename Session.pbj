@@ -59,7 +59,7 @@ message Connect {
     optional boundingsphere3f bounds = 5;
     optional float query_angle = 6;
     optional string mesh = 7;
-    optional string physics = 9;
+    optional bytes physics = 9;
 }
 
 // Response to a connection request
@@ -77,7 +77,7 @@ message ConnectResponse {
     optional Sirikata.Protocol.TimedMotionQuaternion orientation = 4;
     optional boundingsphere3f bounds = 5;
     optional string mesh = 6;
-    optional string physics = 7;
+    optional bytes physics = 7;
 }
 
 // Acknowledges that a successful connection response was receive.
