@@ -41,6 +41,7 @@ package Sirikata.Protocol.Prox;
 
 message QueryRequest {
     optional float query_angle = 1;
+    optional int32 query_max_count = 2;
 }
 
 // Query Results

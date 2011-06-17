@@ -58,6 +58,7 @@ message Connect {
     optional Sirikata.Protocol.TimedMotionQuaternion orientation = 4;
     optional boundingsphere3f bounds = 5;
     optional float query_angle = 6;
+    optional int32 query_max_count = 10;
     optional string mesh = 7;
     optional bytes physics = 9;
 }
