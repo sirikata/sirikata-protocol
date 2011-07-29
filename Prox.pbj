@@ -51,14 +51,20 @@ message ObjectAddition {
     required Sirikata.Protocol.TimedMotionVector location = 2;
     required Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
     required boundingsphere3f bounds = 4;
-    required uint64 seqno = 5;   
+    required uint64 seqno = 5;
     optional string mesh = 6;
     optional bytes physics = 7;
 }
 
 message ObjectRemoval {
+    enum RemovalType {
+        Transient = 1;
+        Permanent = 2;
+    }
+
     required uuid object = 1;
     required uint64 seqno = 2;
+    optional RemovalType type = 3;
 }
 
 // "Atomic" update to proximity results
