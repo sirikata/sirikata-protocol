@@ -39,12 +39,27 @@ package Sirikata.Protocol.Session;
 
 /// Object Oriented Session Messages
 
+message VersionInfo {
+    // Unique identifier for the service, e.g. space, cppoh, katajs, etc.
+    optional string name = 1;
+    // String form of full version
+    optional string version = 2;
+    optional int32 major = 3;
+    optional int32 minor = 4;
+    optional int32 revision = 5;
+    // Version control version -- git hash, svn revision, etc
+    optional string vcs_version = 6;
+}
+
 // Connection request sent to space server, for new or migration connections
 message Connect {
     enum ConnectionType {
         Fresh = 1;
         Migration = 2;
     }
+
+    // Version of the client
+    optional VersionInfo version = 11;
 
     required ConnectionType type = 1;
 
@@ -70,6 +85,9 @@ message ConnectResponse {
         Redirect = 2;
         Error = 3;
     }
+
+    // Version of the server
+    optional VersionInfo version = 8;
 
     required Response response = 1;
     optional uint64 redirect = 2;
