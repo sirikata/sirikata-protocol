@@ -40,8 +40,9 @@ package Sirikata.Protocol.Prox;
 // Query Request
 
 message QueryRequest {
-    optional float query_angle = 1;
-    optional int32 query_max_count = 2;
+    optional float query_angle = 1; // deprecated
+    optional int32 query_max_count = 2; // deprecated
+    optional bytes query_parameters = 3;
 }
 
 // Query Results
