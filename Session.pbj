@@ -133,8 +133,9 @@ message OHMigration {
   required MigrationType type = 1;
   required uuid id = 2;
   optional string oh_name = 3;
-  optional string pwd = 4;
+  optional string password = 4;
   optional string reason = 5;
+  repeated uuid objects = 6;
 }
 
 // Container for session messages.
