@@ -123,12 +123,29 @@ message Disconnect {
     optional string reason = 2;
 }
 
+// Message about OH Coordination, can be sent in either way 
+// between object host and OH coordinator
+message Coordinate {
+  enum CoordinationType {
+    Update = 1;       // All information update (e.g. entity/object added ore removed)
+    MigrateTo = 2;    // Coordinator tell an OH to migrate an entity to another OH
+    MigrateFrom = 3;  // Coordinator tell an OH to migrate an entity from another OH
+    MigrateReq = 4;   // OH send coordinator a migration request
+    Ready = 5;
+  }
+  required CoordinationType type = 1;
+  optional uuid object = 2;
+  optional uuid entity = 3;
+  optional string oh_name = 4;
+}
+
 // Message about OH migration, can be sent in either way 
 // between object host and server
 message OHMigration {
   enum MigrationType {
 	Object = 1;
 	Entity = 2;
+	Ack = 3;
   }
   required MigrationType type = 1;
   required uuid id = 2;
@@ -143,10 +160,8 @@ message Container {
     optional Connect connect = 1;
     optional ConnectResponse connect_response = 2;
     optional ConnectAck connect_ack = 3;
-
     optional InitiateMigration init_migration = 4;
-
-    optional Disconnect disconnect = 5;
-    
-    optional OHMigration oh_migration = 6;
+    optional Disconnect disconnect = 5;  
+    optional Coordinate coordinate = 6;
+    optional OHMigration oh_migration = 7;
 }
