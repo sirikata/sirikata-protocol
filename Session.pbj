@@ -127,11 +127,12 @@ message Disconnect {
 // between object host and OH coordinator
 message Coordinate {
   enum CoordinationType {
-    Update = 1;       // All information update (e.g. entity/object added ore removed)
+    Update = 1;       // entity/object added
     MigrateTo = 2;    // Coordinator tell an OH to migrate an entity to another OH
     MigrateFrom = 3;  // Coordinator tell an OH to migrate an entity from another OH
     MigrateReq = 4;   // OH send coordinator a migration request
-    Ready = 5;
+    Ready = 5;        // Server ready for migration
+    Remove = 6;       // entity/object removed
   }
   required CoordinationType type = 1;
   optional uuid object = 2;
