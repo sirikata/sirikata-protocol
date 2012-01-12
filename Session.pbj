@@ -126,18 +126,21 @@ message Disconnect {
 // Message about OH Coordination, can be sent in either way 
 // between object host and OH coordinator
 message Coordinate {
-  enum CoordinationType {
-    Update = 1;       // entity/object added
-    MigrateTo = 2;    // Coordinator tell an OH to migrate an entity to another OH
-    MigrateFrom = 3;  // Coordinator tell an OH to migrate an entity from another OH
-    MigrateReq = 4;   // OH send coordinator a migration request
-    Ready = 5;        // Server ready for migration
-    Remove = 6;       // entity/object removed
-  }
-  required CoordinationType type = 1;
-  optional uuid object = 2;
-  optional uuid entity = 3;
-  optional string oh_name = 4;
+  	enum CoordinationType {
+    	Add = 1;          // entity/object added
+    	Remove = 2;       // entity/object removed
+    	MigrateTo = 3;    // Coordinator tell an OH to migrate an entity to another OH
+    	MigrateFrom = 4;  // Coordinator tell an OH to migrate an entity from another OH
+    	MigrateReq = 5;   // OH send coordinator a migration request
+    	Ready = 6;        // Server ready for migration
+    	Ack = 7;		  // Ack message when setup connection, include migrate capacity/threshold info.
+  	}
+	required CoordinationType type = 1;
+	optional uuid object = 2;
+	optional uuid entity = 3;
+	optional string oh_name = 4;
+	optional int32 migrate_capacity = 5;
+	optional int32 migrate_threshold = 6;
 }
 
 // Message about OH migration, can be sent in either way 
