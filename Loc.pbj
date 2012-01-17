@@ -52,6 +52,15 @@ message LocationUpdate {
     // the client code simpler, at the expense of slightly larger packets.
     optional uint64 seqno = 6;
 
+    // Epochs are related to seqno, but allow a the requester of
+    // updates to tell whether a request has been handled. Updates are
+    // sent with an epoch number and this value is reported in
+    // LocationUpdates (only back to the objects itself, since its the
+    // only one that needs to resolve differences between requests and
+    // updates). By comparing the value in the update to its latest
+    // request, the client can decide which value to use.
+    optional uint64 epoch = 8;
+
     optional Sirikata.Protocol.TimedMotionVector location = 2;
     optional Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
     optional boundingsphere3f bounds = 4;
@@ -73,6 +82,9 @@ message LocationUpdateRequest {
     optional boundingsphere3f bounds = 3;
     optional string mesh = 4;
     optional bytes physics = 5;
+
+    // See note in LocationUpdate about how to use epochs.
+    optional uint64 epoch = 6;
 }
 
 message Container {
