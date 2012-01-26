@@ -161,6 +161,11 @@ message OHMigration {
 
 // Container for session messages.
 message Container {
+    // Sequence number. This isn't used for ordering, it just allows
+    // unique identication of requests so that replies can be tagged
+    // as being specific to a given request.
+    optional uint64 seqno = 8;
+
     optional Connect connect = 1;
     optional ConnectResponse connect_response = 2;
     optional ConnectAck connect_ack = 3;
