@@ -36,9 +36,9 @@ package Sirikata.Protocol.Object;
 
 message ObjectMessage {
     required uuid source_object = 1;
-    required uint16 source_port = 2;
+    required uint32 source_port = 2;
     required uuid dest_object = 3;
-    required uint16 dest_port = 4;
+    required uint32 dest_port = 4;
     required uint64 unique = 5;
     optional bytes payload = 6;
 }
