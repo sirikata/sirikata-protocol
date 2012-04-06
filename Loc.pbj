@@ -66,6 +66,10 @@ message LocationUpdate {
     optional boundingsphere3f bounds = 4;
     optional string mesh = 5;
     optional bytes physics = 7;
+
+    // The parent object. Do not specify if you don't perform or expose
+    // aggregates, or if this object is the root node.
+    optional uuid parent = 9;
 }
 
 message BulkLocationUpdate {
