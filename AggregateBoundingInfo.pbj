@@ -1,0 +1,18 @@
+// Copyright (c) 2011 Sirikata Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can
+// be found in the LICENSE file.
+
+"pbj-0.0.3"
+
+package Sirikata.Protocol;
+
+// Represents aggregate bounding information. Includes a center
+// offset, the bounds radius of the center *points* of all children
+// objects, and the maximum object radius. Components are optional
+// since parts frequently have defaults, e.g. center_bounds_radius is
+// 0 if we are considering a single object.
+message AggregateBoundingInfo {
+    optional vector3f center_offset = 1;
+    optional float center_bounds_radius = 2;
+    optional float max_object_size = 3;
+}

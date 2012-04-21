@@ -34,6 +34,7 @@
 
 import "TimedMotionVector.pbj";
 import "TimedMotionQuaternion.pbj";
+import "AggregateBoundingInfo.pbj";
 
 package Sirikata.Protocol.Loc;
 
@@ -63,7 +64,15 @@ message LocationUpdate {
 
     optional Sirikata.Protocol.TimedMotionVector location = 2;
     optional Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
-    optional boundingsphere3f bounds = 4;
+
+    // This is the old version of bounds where we just used a bounding
+    // sphere. It is removed, but maintained in comments to avoid a conflicting
+    // field #
+    // optional boundingsphere3f bounds = 4;
+    // This is the version you should now use, which encodes offset,
+    // bounds of center points, and maximum object size.
+    optional Sirikata.Protocol.AggregateBoundingInfo aggregate_bounds = 10;
+
     optional string mesh = 5;
     optional bytes physics = 7;
 
