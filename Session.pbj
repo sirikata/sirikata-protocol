@@ -58,27 +58,34 @@ message Connect {
         Migration = 2;
     }
 
-    // Version of the client
-    optional VersionInfo version = 11;
-
-    required ConnectionType type = 1;
-
     // Requested object identifier in this space
-    required uuid object = 2;
+    required uuid object = 1;
     // Optional authentication data, encoded in a byte array to
     // support a variety of authentication methods.
     optional bytes auth = 8;
 
-    optional Sirikata.Protocol.TimedMotionVector loc = 3;
-    optional Sirikata.Protocol.TimedMotionQuaternion orientation = 4;
-    optional boundingsphere3f bounds = 5;
-    optional float query_angle = 6; // deprecated
-    optional int32 query_max_count = 10; // deprecated
+    optional Sirikata.Protocol.TimedMotionVector loc = 2;
+    optional Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
+    optional boundingsphere3f bounds = 4;
+     optional string mesh = 1000;
+     optional bytes physics = 1001;
+
+    required ConnectionType type = 10;
+
+    // Version of the client
+    optional VersionInfo version = 11;
+
     optional bytes query_parameters = 12;
-    optional string mesh = 7;
-    optional bytes physics = 9;
+
     optional bytes oh_name = 13;
-    optional string zernike = 14;    
+
+
+     optional float query_angle = 14; // deprecated
+     optional int32 query_max_count = 15; // deprecated
+
+     optional string zernike = 1004;
+
+    extensions 1010 to 65535;
 }
 
 // Response to a connection request
@@ -89,17 +96,20 @@ message ConnectResponse {
         Error = 3;
     }
 
+    optional Sirikata.Protocol.TimedMotionVector loc = 2;
+    optional Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
+    optional boundingsphere3f bounds = 4;
+
+     optional string mesh = 1000;
+     optional bytes physics = 1001;
+
     // Version of the server
-    optional VersionInfo version = 8;
+    optional VersionInfo version = 11;
 
-    required Response response = 1;
-    optional uint64 redirect = 2;
+    required Response response = 12;
+    optional uint64 redirect = 13;
 
-    optional Sirikata.Protocol.TimedMotionVector loc = 3;
-    optional Sirikata.Protocol.TimedMotionQuaternion orientation = 4;
-    optional boundingsphere3f bounds = 5;
-    optional string mesh = 6;
-    optional bytes physics = 7;
+    extensions 1010 to 65535;
 }
 
 // Acknowledges that a successful connection response was receive.

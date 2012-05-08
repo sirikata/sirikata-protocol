@@ -40,6 +40,10 @@ package Sirikata.Protocol.Loc;
 message LocationUpdate {
     required uuid object = 1;
 
+    optional Sirikata.Protocol.TimedMotionVector location = 2;
+    optional Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
+    optional boundingsphere3f bounds = 4;
+
     // The seqno is used to indicate relative age of updates so out of order
     // updates can be handled properly. They aren't guaranteed to be sequential
     // (i.e. you might receive 4, 7, 19), but they are guaranteed to be
@@ -50,7 +54,7 @@ message LocationUpdate {
     // number there would be sufficient for the client to properly handle out of
     // order updates, it is provided in LocationUpdates individually to make
     // the client code simpler, at the expense of slightly larger packets.
-    optional uint64 seqno = 6;
+    optional uint64 seqno = 5;
 
     // Epochs are related to seqno, but allow a the requester of
     // updates to tell whether a request has been handled. Updates are
@@ -59,17 +63,16 @@ message LocationUpdate {
     // only one that needs to resolve differences between requests and
     // updates). By comparing the value in the update to its latest
     // request, the client can decide which value to use.
-    optional uint64 epoch = 8;
+    optional uint64 epoch = 6;
 
-    optional Sirikata.Protocol.TimedMotionVector location = 2;
-    optional Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
-    optional boundingsphere3f bounds = 4;
-    optional string mesh = 5;
-    optional bytes physics = 7;
+     optional string mesh = 1000;
+     optional bytes physics = 1001;
 
     // The parent object. Do not specify if you don't perform or expose
     // aggregates, or if this object is the root node.
-    optional uuid parent = 9;
+     optional uuid parent = 1003;
+
+    extensions 1010 to 65535;
 }
 
 message BulkLocationUpdate {
@@ -81,14 +84,18 @@ message BulkLocationUpdate {
 // This should be sent from object -> Space(Loc) in an
 // ObjectMessage.
 message LocationUpdateRequest {
-    optional Sirikata.Protocol.TimedMotionVector location = 1;
-    optional Sirikata.Protocol.TimedMotionQuaternion orientation = 2;
-    optional boundingsphere3f bounds = 3;
-    optional string mesh = 4;
-    optional bytes physics = 5;
+
+    optional Sirikata.Protocol.TimedMotionVector location = 2;
+    optional Sirikata.Protocol.TimedMotionQuaternion orientation = 3;
+    optional boundingsphere3f bounds = 4;
+
+     optional string mesh = 1000;
+     optional bytes physics = 1001;
 
     // See note in LocationUpdate about how to use epochs.
     optional uint64 epoch = 6;
+
+    extensions 1010 to 65535;
 }
 
 message Container {
