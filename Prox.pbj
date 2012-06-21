@@ -48,6 +48,40 @@ message QueryRequest {
 
 // Query Results
 
+/// Indicates basic properties of a replicated index (tree). These
+/// properties are included with updates that include the root node,
+/// ensuring they are made available at/before the first time they
+/// are needed, but not included in every update and do not require
+/// a separate type of message to notify the client of their creation.
+message IndexProperties {
+
+    // Unique integer identifier for this tree. This is only unique to
+    // the node generating the tree. This doesn't indicate any properties,
+    // it's just used to ensure we can uniquely identify a tree (e.g. in
+    // case we're rebuilding and replicating both trees, which would then
+    // have all identical properties otherwise).
+    optional uint32 id = 1;
+
+    // An optional opaque identifier. In simple replication this isn't
+    // necessary, but when replicating multiple trees, this allows you
+    // to figure out how to connect the trees together without
+    // requiring the tree names/connections to follow a particular
+    // naming scheme. For example, space servers may replicate trees to
+    // each other, and when replicating those down to the OH, this could
+    // be set to the server IDs of the space servers they are replicated
+    // from so those trees can be connected with a top-level pinto tree.
+    optional string index_id = 2;
+
+    // Static vs. dynamic (and possibly other classifications?). If
+    // not specified, you need to assume dynamic, but other values
+    // allow for optimizations.
+    enum DynamicClassification {
+        Static = 1;
+        Dynamic = 2;
+    }
+    optional DynamicClassification dynamic_classification = 3;
+}
+
 message ObjectAddition {
     required uuid object = 1;
     required Sirikata.Protocol.TimedMotionVector location = 2;
@@ -96,6 +130,10 @@ message ObjectRemoval {
 message ProximityUpdate {
     repeated ObjectAddition addition = 1;
     repeated ObjectRemoval removal = 2;
+
+    // Included only if an update includes an addition of the root
+    // node. Specifies the properties of this index.
+    optional IndexProperties index_properties = 3;
 }
 
 message ProximityResults {
