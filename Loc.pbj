@@ -79,6 +79,20 @@ message LocationUpdate {
     // The parent object. Do not specify if you don't perform or expose
     // aggregates, or if this object is the root node.
     optional uuid parent = 9;
+
+
+    // List of identifiers of indices this update is relevant to. Servers
+    // may be using the object in multiple indexes (trees), e.g. for
+    // rebuilding, and therefore the client will need to apply this update
+    // to multiple trees. Since Loc updates can arrive before their
+    // corresponding prox additions ("orphan" updates) we need to provide
+    // this information in the message rather than relying on the client
+    // to keep track of it (otherwise the client wouldn't know that it
+    // actually has an orphan update for one of the indices and end up with
+    // out of date state that may never get fixed).
+    //
+    // Modes without index/tree replication will not use this field.
+    repeated uint32 index_id = 11;
 }
 
 message BulkLocationUpdate {
