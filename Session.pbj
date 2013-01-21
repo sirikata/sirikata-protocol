@@ -78,7 +78,11 @@ message Connect {
     optional string mesh = 7;
     optional bytes physics = 9;
     optional bytes oh_name = 13;
-    optional string zernike = 14;    
+    // zernike is superceded by query_data
+    //    optional string zernike = 14; // deprecated
+    // Additional query/implementation-specific query processor data,
+    // e.g. zernike descriptor, bloom filter data, etc.
+    optional bytes query_data = 15;
 }
 
 // Response to a connection request

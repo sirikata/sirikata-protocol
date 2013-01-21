@@ -75,6 +75,7 @@ message LocationUpdate {
 
     optional string mesh = 5;
     optional bytes physics = 7;
+    optional bytes query_data = 12;
 
     // The parent object. Do not specify if you don't perform or expose
     // aggregates, or if this object is the root node.
@@ -93,6 +94,8 @@ message LocationUpdate {
     //
     // Modes without index/tree replication will not use this field.
     repeated uint32 index_id = 11;
+
+    // current max id = 12
 }
 
 message BulkLocationUpdate {
@@ -109,6 +112,7 @@ message LocationUpdateRequest {
     optional boundingsphere3f bounds = 3;
     optional string mesh = 4;
     optional bytes physics = 5;
+    optional bytes query_data = 7;
 
     // See note in LocationUpdate about how to use epochs.
     optional uint64 epoch = 6;

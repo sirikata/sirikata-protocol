@@ -98,6 +98,9 @@ message ObjectAddition {
     required uint64 seqno = 5;
     optional string mesh = 6;
     optional bytes physics = 7;
+    // When used between servers, prox additions will include the
+    // query_data. When an addition is provided as a result, they can be omitted
+    optional bytes query_data = 11;
 
     // The following are only used by certain types of query types and are used
     // in providing the structure of the query data structure as part of the
